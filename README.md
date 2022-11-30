@@ -1,1 +1,1 @@
-# hotel-rate-rule-and-book-pad
+# hotel-book-reprice-pad
