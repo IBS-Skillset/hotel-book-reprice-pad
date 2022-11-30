@@ -1,4 +1,4 @@
-package com.hotel.adaptor;
+package com.hotel.adapter;
 
 import com.hotel.exception.HotelException;
 import com.hotel.endpoint.DjocaEndPointFactory;
@@ -32,7 +32,7 @@ public class HotelRateRuleAdapter {
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(uriBuilder.build().toUriString(),
                     requestWriter.toString(), String.class);
             System.out.println(responseEntity.getBody());
-            System.out.println("response : " +unmarshaller.unmarshal(new StringReader(responseEntity.getBody())));
+            System.out.println("response : " +unmarshaller.unmarshal(new StringReader(responseEntity.getBody())).toString());
             return unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
 
         } catch (JAXBException b) {
