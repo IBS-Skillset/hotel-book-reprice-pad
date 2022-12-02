@@ -1,12 +1,14 @@
 package com.hotel.service.raterule;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import io.grpc.Metadata;
+import io.grpc.Status;
+import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.naming.AuthenticationException;
+import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
 
 @GrpcService
 public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRateRuleServiceImplBase {
@@ -16,13 +18,25 @@ public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRa
 
     @Override
     public void getHotelRateRule(HotelRateRuleRequest request, StreamObserver<HotelRateRuleResponse> responseObserver) {
+        HotelRateRuleResponse response = null;
         try {
-            HotelRateRuleResponse response = hotelRateRuleService.getHotelRateRuleItemsFromSupplier(request);
-            System.out.println();
+            response = hotelRateRuleService.getHotelRateRuleItemsFromSupplier(request);
             responseObserver.onNext(response);
             responseObserver.onCompleted();
-        } catch (Exception e) {
-            responseObserver.onError(new AuthenticationException("authentication exception"));
+        }
+        catch (Exception e) {
+            Metadata metadata = new Metadata();
+            metadata.put(Metadata.Key.of("error",ASCII_STRING_MARSHALLER), getString(e));
+            responseObserver.onError(new StatusRuntimeException(Status.CANCELLED,metadata));
         }
     }
+
+    private static String getString(Exception e) {
+        String cause = e.getCause()!= null ? e.getCause().getMessage() : "Unknown code";
+        String a = "{\"errorCode\" : \"" +cause +"\","+
+                " \"errorMessage\" : \"" + e.getMessage() +"\"}";
+        return a;
+    }
+
+
 }
