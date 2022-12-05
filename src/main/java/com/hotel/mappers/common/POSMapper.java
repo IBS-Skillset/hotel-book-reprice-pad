@@ -1,6 +1,6 @@
 package com.hotel.mappers.common;
 
-import com.hotel.service.raterule.HotelRateRuleRequest;
+import com.hotel.service.common.Context;
 import com.hotel.util.APIConstants;
 import org.opentravel.ota._2003._05.ArrayOfSourceType;
 import org.opentravel.ota._2003._05.SourceType;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class POSMapper {
 
-    public ArrayOfSourceType mapPOS(HotelRateRuleRequest request){
+    public ArrayOfSourceType mapPOS(Context request, String languageCode){
         ArrayOfSourceType arrayOfSourceType = new ArrayOfSourceType();
         SourceType sourceType = new SourceType();
         SourceType.RequestorID requesterID= new SourceType.RequestorID();
 
-        requesterID.setID(request.getRequestContext().getSupplierRequestorId());
-        requesterID.setMessagePassword(request.getRequestContext().getSupplierCredential());
-        requesterID.setLanguageCode(request.getLanguageCode());
+        requesterID.setID(request.getSupplierRequestorId());
+        requesterID.setMessagePassword(request.getSupplierCredential());
+        requesterID.setLanguageCode(languageCode);
         requesterID.setType(APIConstants.TYPE);
 
         sourceType.setRequestorID(requesterID);

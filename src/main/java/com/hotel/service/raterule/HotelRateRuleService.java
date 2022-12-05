@@ -52,7 +52,7 @@ public class HotelRateRuleService {
 
     public OTAHotelBookingRuleRQ getOTAHotelBookingRuleRQ(HotelRateRuleRequest request) {
         OTAHotelBookingRuleRQ bookingRuleRQ = new OTAHotelBookingRuleRQ();
-        bookingRuleRQ.setPOS(posMapper.mapPOS(request));
+        bookingRuleRQ.setPOS(posMapper.mapPOS(request.getRequestContext(), request.getLanguageCode()));
         bookingRuleRQ.setRuleMessage(ruleMessageMapper.mapRuleMessage(request));
         return bookingRuleRQ;
     }
