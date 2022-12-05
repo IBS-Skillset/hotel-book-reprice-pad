@@ -13,7 +13,9 @@ public class DjocaEndPointFactory {
         try {
             context = JAXBContext.newInstance(
                     OTAHotelBookingRuleRQ.class,
-                    OTAHotelBookingRuleRS.class
+                    OTAHotelBookingRuleRS.class,
+                    OTAHotelResRQ.class,
+                    OTAHotelResRS.class
             );
         } catch (JAXBException e) {
             throw new IllegalStateException("Cannot initialize DJOCA services");
