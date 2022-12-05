@@ -1,7 +1,7 @@
 package com.hotel.mappers.common;
 
-import com.hotel.util.APIConstants;
 import com.hotel.service.raterule.HotelRateRuleRequest;
+import com.hotel.util.APIConstants;
 import org.opentravel.ota._2003._05.ArrayOfSourceType;
 import org.opentravel.ota._2003._05.SourceType;
 import org.springframework.stereotype.Component;

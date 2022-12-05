@@ -1,3 +1,30 @@
-grpc:
-  server:
-    port: 8088
+spring:
+  application:
+    name: HOTEL-BOOK-REPRICE-PAD
+
+info:
+  app:
+    name: '@project.name@'
+    version: '@project.version@'
+
+management:
+  info:
+    env:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+      base-path: /monitoring
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    status-page-url-path: /actuator/info
+    health-check-url-path: /actuator/health
+    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: ${eureka.service-url.default}
