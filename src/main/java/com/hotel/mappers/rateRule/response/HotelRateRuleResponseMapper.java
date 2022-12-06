@@ -1,7 +1,6 @@
-package com.hotel.mappers.response;
+package com.hotel.mappers.rateRule.response;
 
 import com.hotel.service.raterule.HotelRateRuleResponse;
-import lombok.extern.slf4j.Slf4j;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
 import org.springframework.stereotype.Component;
 

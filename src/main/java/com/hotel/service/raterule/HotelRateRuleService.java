@@ -3,13 +3,13 @@ package com.hotel.service.raterule;
 import com.hotel.adapter.HotelRateRuleAdapter;
 import com.hotel.endpoint.DjocaEndPointFactory;
 import com.hotel.mappers.common.POSMapper;
-import com.hotel.mappers.request.raterule.RuleMessageMapper;
-import com.hotel.mappers.response.HotelRateRuleResponseMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.hotel.mappers.rateRule.request.RuleMessageMapper;
+import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

@@ -6,7 +6,7 @@ import org.opentravel.ota._2003._05.CustomerType;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddressMapper {
+public class CustomerAddressMapper {
 
     public CustomerType.Address mapAddress(Address address) {
         CustomerType.Address custAddress = new CustomerType.Address();

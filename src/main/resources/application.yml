@@ -1,6 +1,8 @@
 spring:
   application:
     name: HOTEL-BOOK-REPRICE-PAD
+server:
+  port: 0
 
 info:
   app:
@@ -16,6 +18,9 @@ management:
       exposure:
         include: "*"
       base-path: /monitoring
+grpc:
+  server:
+    port: 0
 
 eureka:
   instance:

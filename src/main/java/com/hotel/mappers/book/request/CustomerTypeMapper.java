@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerTypeMapper {
     @Autowired
-    AddressMapper addressMapper;
+    CustomerAddressMapper customerAddressMapper;
 
     public CustomerType map(UserInfo userInfo) {
         CustomerType customer = new CustomerType();
@@ -26,7 +26,7 @@ public class CustomerTypeMapper {
         EmailType emailType = new EmailType();
         emailType.setValue(userInfo.getEmail());
         customer.getEmail().add(emailType);
-        customer.getAddress().add(addressMapper.mapAddress(userInfo.getAddress()));
+        customer.getAddress().add(customerAddressMapper.mapAddress(userInfo.getAddress()));
         return customer;
     }
 }
