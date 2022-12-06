@@ -50,7 +50,7 @@ public class HotelRateRuleResponseMapperTest {
             errorsType.getError().add(errorType);
             OTAHotelBookingRuleRS hotelBookingRuleRS = new OTAHotelBookingRuleRS();
             hotelBookingRuleRS.setErrors(errorsType);
-            HotelRateRuleResponse rateRuleResponse = mapper.map(hotelBookingRuleRS, "anyString");
+            mapper.map(hotelBookingRuleRS, "anyString");
         });
 
     }

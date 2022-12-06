@@ -7,10 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;
 
-import java.math.BigInteger;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class RuleMessageMapperTest {
 
@@ -22,7 +19,6 @@ public class RuleMessageMapperTest {
         HotelRateRuleRequest request = HotelRateRuleRequest.newBuilder().
                 setHotelCode("abc").
                 setRatePlanId("1234").build();
-
         OTAHotelBookingRuleRQ.RuleMessage ruleMessage = ruleMessageMapper.mapRuleMessage(request);
         assertThat(ruleMessage).isNotNull();
         assertThat(ruleMessage.getHotelCode()).isEqualTo("abc");

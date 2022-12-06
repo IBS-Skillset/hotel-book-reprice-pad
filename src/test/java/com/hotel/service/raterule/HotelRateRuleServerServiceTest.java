@@ -2,8 +2,6 @@ package com.hotel.service.raterule;
 
 import com.hotel.service.common.Context;
 import com.hotel.service.common.ResponseStatus;
-import io.grpc.Status;
-import io.grpc.StatusRuntimeException;
 import io.grpc.internal.testing.StreamRecorder;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
