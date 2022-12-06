@@ -101,6 +101,34 @@
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.grpc</groupId>
+            <artifactId>grpc-testing</artifactId>
+            <version>1.48.1</version>
+            <scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>net.devh</groupId>
+                    <artifactId>grpc-spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.devh</groupId>
+                    <artifactId>grpc-server-spring-boot-starter</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.devh</groupId>
+                    <artifactId>grpc-server-spring-boot-autoconfigure</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>net.devh</groupId>
+                    <artifactId>grpc-common-spring-boot</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
