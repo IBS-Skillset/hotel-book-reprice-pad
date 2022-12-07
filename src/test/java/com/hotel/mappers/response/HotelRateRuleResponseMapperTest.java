@@ -6,8 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.opentravel.ota._2003._05.*;
-
+import org.opentravel.ota._2003._05.ArrayOfOTAHotelBookingRuleRSRuleMessageStatusApplicationRoomRate;
+import org.opentravel.ota._2003._05.ErrorType;
+import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
+import org.opentravel.ota._2003._05.TPAExtensionsType;
+import org.opentravel.ota._2003._05.ErrorsType;
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
