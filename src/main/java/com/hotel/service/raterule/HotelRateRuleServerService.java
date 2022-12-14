@@ -1,6 +1,8 @@
 package com.hotel.service.raterule;
 
 
+import com.hotel.adapter.HotelRateRuleAdapter;
+import com.hotel.mappers.rateRule.request.RateRuleRequestMapper;
 import io.grpc.Metadata;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
@@ -14,13 +16,16 @@ import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
 public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRateRuleServiceImplBase {
 
     @Autowired
-    private HotelRateRuleService hotelRateRuleService;
+    private HotelRateRuleAdapter rateRuleAdaptor;
+
+    @Autowired
+    private RateRuleRequestMapper rateRuleRequestMapper;
 
     @Override
     public void getHotelRateRule(HotelRateRuleRequest request, StreamObserver<HotelRateRuleResponse> responseObserver) {
         HotelRateRuleResponse response = null;
         try {
-            response = hotelRateRuleService.getHotelRateRuleItemsFromSupplier(request);
+            response = rateRuleAdaptor.restClient(rateRuleRequestMapper.getOTAHotelBookingRuleRQ(request),request);
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         }
@@ -37,6 +42,4 @@ public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRa
                 " \"errorMessage\" : \"" + e.getMessage() +"\"}";
         return a;
     }
-
-
 }

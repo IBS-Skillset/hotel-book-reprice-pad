@@ -1,4 +1,4 @@
-package com.hotel.mappers.response;
+package com.hotel.mappers.raterule.response;
 
 import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.raterule.HotelRateRuleResponse;
