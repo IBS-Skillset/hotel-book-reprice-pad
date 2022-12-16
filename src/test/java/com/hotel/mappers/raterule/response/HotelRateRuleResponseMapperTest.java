@@ -36,12 +36,16 @@ public class HotelRateRuleResponseMapperTest {
         tpaExtensionsType.setCancelPolicyDeadLine("20/12/12");
         OTAHotelBookingRuleRS.RuleMessage ruleMessage = new OTAHotelBookingRuleRS.RuleMessage();
         ruleMessage.setHotelCode("abc");
+        tpaExtensionsType.setNonRefundable("false");
+        tpaExtensionsType.setBreakfastIncluded("true");
         ruleMessage.setStatusApplication(statusApplication);
         ruleMessage.setTPAExtensions(tpaExtensionsType);
         OTAHotelBookingRuleRS hotelBookingRuleRS = new OTAHotelBookingRuleRS();
         hotelBookingRuleRS.setRuleMessage(ruleMessage);
         HotelRateRuleResponse rateRuleResponse = mapper.map(hotelBookingRuleRS, "abc");
         assertThat(rateRuleResponse).isNotNull();
+        assertThat(rateRuleResponse.getIsBreakfastIncluded()).isTrue();
+        assertThat(rateRuleResponse.getIsCancellable()).isTrue();
     }
 
     @Test
