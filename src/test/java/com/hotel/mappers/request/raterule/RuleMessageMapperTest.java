@@ -1,5 +1,6 @@
 package com.hotel.mappers.request.raterule;
 
+import com.hotel.mappers.rateRule.request.RuleMessageMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
