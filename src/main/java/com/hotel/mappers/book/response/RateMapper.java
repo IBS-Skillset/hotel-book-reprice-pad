@@ -7,10 +7,11 @@ import static com.hotel.service.util.ProtoBufUtil.safeSetProtoField;
 
 @Component
 public class RateMapper {
-    public RoomRate map(TotalType rateResponse) {
+    public RoomRate map(TotalType rateResponse ,String rateDescription) {
         RoomRate.Builder roomRateBuilder = RoomRate.newBuilder();
         safeSetProtoField(roomRateBuilder::setCurrencyCode, rateResponse.getCurrencyCode());
         safeSetProtoField(roomRateBuilder::setTotalAmount, rateResponse.getAmountAfterTax().floatValue());
+        safeSetProtoField(roomRateBuilder::setRateDescription, rateDescription);
         return roomRateBuilder.build();
     }
 }

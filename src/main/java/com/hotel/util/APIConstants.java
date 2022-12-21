@@ -11,6 +11,6 @@ public class APIConstants {
     public static final String BOOKING_CODE = "INT";
     public static final String CONFIRMATION_CODE = "BKG";
     public static final String AGENT_ID = "traveldoo";
-
+    public static  final String SUPPLIER_SERVER_ERROR = "999";
 
 }

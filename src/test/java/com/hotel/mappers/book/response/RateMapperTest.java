@@ -23,10 +23,11 @@ public class RateMapperTest {
     @Test
     public void map() {
         TotalType rateResponse = getRate();
-        RoomRate rate = rateMapper.map(rateResponse);
+        RoomRate rate = rateMapper.map(rateResponse ,"rate description");
         assertThat(rate).isNotNull();
         assertThat(rate.getCurrencyCode()).isEqualTo("EUR");
         assertThat(rate.getTotalAmount()).isEqualTo(14456.65f);
+        assertThat(rate.getRateDescription()).isEqualTo("rate description");
     }
 
     private TotalType getRate() {

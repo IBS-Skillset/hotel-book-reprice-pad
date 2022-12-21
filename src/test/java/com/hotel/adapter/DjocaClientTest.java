@@ -1,5 +1,6 @@
 package com.hotel.adapter;
 
+import com.hotel.exception.HotelBookException;
 import com.hotel.service.availability.HotelAvailabilityRequest;
 import com.hotel.service.common.Context;
 import org.junit.Test;
@@ -46,7 +47,7 @@ public class DjocaClientTest {
         }
     }
 
-    @Test
+    @Test(expected = HotelBookException.class)
     public void testException() {
         try {
             HotelAvailabilityRequest request = HotelAvailabilityRequest.newBuilder().
