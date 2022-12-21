@@ -16,6 +16,7 @@ import javax.xml.bind.JAXBException;
 
 import static com.hotel.util.APIConstants.BOOK_SERVICE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.atLeast;
@@ -52,5 +53,20 @@ public class BookServerServiceTest {
     private HotelBookRequest getRequest() {
         HotelBookRequest request = HotelBookRequest.newBuilder().build();
         return request;
+    }
+
+    @Test(expected = Exception.class)
+    public void testExceptionCase() throws JAXBException {
+        HotelBookRequest request = getRequest();
+        OTAHotelResRS otaHotelResRS = new OTAHotelResRS();
+        OTAHotelResRQ otaHotelResRQ = new OTAHotelResRQ();
+        HotelBookResponse.Builder hotelBookResponse = HotelBookResponse.newBuilder();
+        StreamRecorder<HotelBookResponse> responseStreamRecorder = StreamRecorder.create();
+        when(hotelReservationsMapper.map(request)).thenReturn(otaHotelResRQ);
+        when(djocaClient.restClient(otaHotelResRQ, request.getRequestContext().getSupplierUrl(), BOOK_SERVICE)).thenThrow(new Exception("Error Testing"));
+        when(hotelBookResponseMapper.map(otaHotelResRS)).thenReturn(hotelBookResponse.build());
+        bookServerService.getHotelBook(request, responseStreamRecorder);
+        assertThat(responseStreamRecorder).isNotNull();
+        assertThatExceptionOfType(Exception.class);
     }
 }

@@ -40,7 +40,7 @@ public class HotelBookResponseMapper {
             safeSetProtoField(hotelBookResponseBuilder::setHotelCode, roomStay.getBasicPropertyInfo().getHotelCode());
             safeSetProtoField(hotelBookResponseBuilder::setHotelName, roomStay.getBasicPropertyInfo().getHotelName());
             safeSetProtoField(hotelBookResponseBuilder::setHotelAddress, addressMapper.map(roomStay.getBasicPropertyInfo().getAddress()));
-            safeSetProtoField(hotelBookResponseBuilder::setRoomRate,rateMapper.map(roomStay.getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase()));
+            safeSetProtoField(hotelBookResponseBuilder::setRoomRate,rateMapper.map(roomStay.getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase() , ratePlanType.getRatePlanDescription().getText()));
             safeSetProtoField(responseStatusBuilder::setStatus, APIConstants.SUCCESS);
             safeSetProtoField(hotelBookResponseBuilder::setResponseStatus, responseStatusBuilder);
             safeSetProtoField(hotelBookResponseBuilder::setPnrInfo, pnrInfoMapper.map(response.getHotelReservations().getHotelReservation().get(0).getTPAExtensions(),

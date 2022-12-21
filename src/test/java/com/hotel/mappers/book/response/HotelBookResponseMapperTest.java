@@ -50,11 +50,14 @@ public class HotelBookResponseMapperTest {
     @Test
   public void map() {
         OTAHotelResRS response = getResponse();
+        final ArrayOfRoomStaysTypeRoomStay.RoomStay roomStay = response.getHotelReservations().getHotelReservation().get(0)
+                .getRoomStays().getRoomStay().get(0);
+        final RatePlanType ratePlanType = roomStay.getRatePlans().getRatePlan().get(0);
         Address address = Address.newBuilder().build();
         RoomRate roomRate = RoomRate.newBuilder().build();
         PnrInfo pnrInfo = PnrInfo.newBuilder().build();
         when(addressMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getBasicPropertyInfo().getAddress())).thenReturn(address);
-        when(rateMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase())).thenReturn(roomRate);
+        when(rateMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase() ,ratePlanType.getRatePlanDescription().getText())).thenReturn(roomRate);
         when(pnrInfoMapper.map(response.getHotelReservations().getHotelReservation().get(0).getTPAExtensions(),response.getHotelReservations().getHotelReservation().get(0).getResGlobalInfo())).thenReturn(pnrInfo);
         HotelBookResponse hotelBookResponse = hotelBookResponseMapper.map(response);
         assertThat(hotelBookResponse).isNotNull();
@@ -66,7 +69,7 @@ public class HotelBookResponseMapperTest {
         assertThat(hotelBookResponse.getHotelCode()).isEqualTo("123");
         assertThat(hotelBookResponse.getHotelName()).isEqualTo("Marriot");
         verify(addressMapper,atLeast(1)).map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getBasicPropertyInfo().getAddress());
-        verify(rateMapper,atLeast(1)).map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase());
+        verify(rateMapper,atLeast(1)).map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase() , ratePlanType.getRatePlanDescription().getText());
         verify(pnrInfoMapper,atLeast(1)).map(response.getHotelReservations().getHotelReservation().get(0).getTPAExtensions(),response.getHotelReservations().getHotelReservation().get(0).getResGlobalInfo());
     }
 
