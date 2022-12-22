@@ -7,25 +7,24 @@ import io.grpc.Metadata;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
+import lombok.AllArgsConstructor;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
 
 @GrpcService
+@AllArgsConstructor
 public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRateRuleServiceImplBase {
 
-    @Autowired
-    private HotelRateRuleAdapter rateRuleAdaptor;
+    private HotelRateRuleAdapter rateRuleAdapter;
 
-    @Autowired
     private RateRuleRequestMapper rateRuleRequestMapper;
 
     @Override
     public void getHotelRateRule(HotelRateRuleRequest request, StreamObserver<HotelRateRuleResponse> responseObserver) {
         HotelRateRuleResponse response = null;
         try {
-            response = rateRuleAdaptor.restClient(rateRuleRequestMapper.getOTAHotelBookingRuleRQ(request),request);
+            response = rateRuleAdapter.restClient(rateRuleRequestMapper.getOTAHotelBookingRuleRQ(request),request);
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         }
