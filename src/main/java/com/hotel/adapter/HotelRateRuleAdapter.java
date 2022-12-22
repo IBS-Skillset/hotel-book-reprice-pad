@@ -5,10 +5,10 @@ import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import com.hotel.service.raterule.HotelRateRuleResponse;
 import com.hotel.util.APIConstants;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -24,12 +24,11 @@ import java.io.StringWriter;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-@Component
 @Slf4j
+@AllArgsConstructor
+@Component
 public class HotelRateRuleAdapter {
 
-    @Autowired
     private HotelRateRuleResponseMapper mapper;
 
     public HotelRateRuleResponse restClient(OTAHotelBookingRuleRQ bookingRuleRQ, HotelRateRuleRequest request) throws Exception {

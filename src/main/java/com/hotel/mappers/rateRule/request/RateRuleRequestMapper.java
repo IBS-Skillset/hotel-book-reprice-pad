@@ -2,16 +2,14 @@ package com.hotel.mappers.rateRule.request;
 
 import com.hotel.mappers.common.POSMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
+import lombok.AllArgsConstructor;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class RateRuleRequestMapper {
-
-    @Autowired
     private POSMapper posMapper;
-    @Autowired
     private RuleMessageMapper ruleMessageMapper;
 
     public OTAHotelBookingRuleRQ getOTAHotelBookingRuleRQ(HotelRateRuleRequest request) {
