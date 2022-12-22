@@ -1,6 +1,8 @@
 package com.hotel.adapter;
 
 import com.hotel.endpoint.DjocaEndPointFactory;
+import com.hotel.exception.HotelBookException;
+import com.hotel.util.APIConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -34,10 +36,11 @@ public class DjocaClient {
             return unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
         } catch (JAXBException b) {
             log.info("JAXBException caught " + b);
+            throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         } catch (Exception e) {
             log.info("Exception occured in request-response to Djoca " + e);
+            throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         }
-        return null;
     }
 
 }
