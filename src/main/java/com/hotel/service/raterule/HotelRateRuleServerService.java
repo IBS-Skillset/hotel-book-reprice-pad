@@ -35,10 +35,10 @@ public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRa
         }
     }
 
-    private static String getString(Exception e) {
-        String cause = e.getCause()!= null ? e.getCause().getMessage() : "Unknown code";
+    private static String getString(Exception errorMessage) {
+        String cause = errorMessage.getCause()!= null ? errorMessage.getCause().getMessage() : "Unknown code";
         String a = "{\"errorCode\" : \"" +cause +"\","+
-                " \"errorMessage\" : \"" + e.getMessage() +"\"}";
+                " \"errorMessage\" : \"" + errorMessage.getMessage() +"\"}";
         return a;
     }
 }
