@@ -4,6 +4,9 @@ import com.hotel.service.raterule.HotelRateRuleResponse;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
 import org.springframework.stereotype.Component;
 
+import static com.hotel.util.APIConstants.FALSE;
+import static com.hotel.util.APIConstants.TRUE;
+
 @Component
 public class HotelRateRuleResponseMapper {
 
@@ -16,6 +19,8 @@ public class HotelRateRuleResponseMapper {
                     .setAmount(hotelBookingRuleRS.getRuleMessage().getStatusApplication().getRoomRates().getRoomRate().get(0).getAmount().toString())
                     .setPenaltyDescriptionText(penaltyDescriptionText)
                     .setCancelPolicyDeadLine(hotelBookingRuleRS.getRuleMessage().getTPAExtensions().getCancelPolicyDeadLine())
+                    .setIsCancellable(hotelBookingRuleRS.getRuleMessage().getTPAExtensions().getNonRefundable().equals(FALSE))
+                    .setIsBreakfastIncluded(hotelBookingRuleRS.getRuleMessage().getTPAExtensions().getBreakfastIncluded().equals(TRUE))
                     .build();
         }
         catch (Exception e){
