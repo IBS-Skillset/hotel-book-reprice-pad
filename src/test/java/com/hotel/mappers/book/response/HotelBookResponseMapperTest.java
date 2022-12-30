@@ -87,11 +87,10 @@ public class HotelBookResponseMapperTest {
          errors.getError().add(error);
          response.setErrors(errors);
          HotelBookResponse.Builder hotelBookResponseBuilder = HotelBookResponse.newBuilder();
-         when(errorResponseMapper.mapErrorResponse(
-                 response.getErrors().getError().get(0).getValue(),response.getErrors().getError().get(0).getCode())).thenReturn(hotelBookResponseBuilder.build());
+         when(errorResponseMapper.mapErrorResponse(response.getErrors())).thenReturn(hotelBookResponseBuilder.build());
          HotelBookResponse hotelBookResponse = hotelBookResponseMapper.map(response);
          assertThat(hotelBookResponse).isNotNull();
-         verify(errorResponseMapper, atLeast(1)).mapErrorResponse(response.getErrors().getError().get(0).getValue(),response.getErrors().getError().get(0).getCode());
+         verify(errorResponseMapper, atLeast(1)).mapErrorResponse(response.getErrors());
 
      }
     private OTAHotelResRS getResponse() {

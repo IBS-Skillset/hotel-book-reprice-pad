@@ -47,8 +47,7 @@ public class HotelBookResponseMapper {
                     response.getHotelReservations().getHotelReservation().get(0).getResGlobalInfo()));
             return hotelBookResponseBuilder.build();
         } else {
-            return errorResponseMapper.mapErrorResponse(response.getErrors().getError().get(0).getValue(),
-                    response.getErrors().getError().get(0).getCode());
+            return errorResponseMapper.mapErrorResponse(response.getErrors());
         }
 
 
