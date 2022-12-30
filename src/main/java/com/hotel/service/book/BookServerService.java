@@ -14,7 +14,6 @@ import net.devh.boot.grpc.server.service.GrpcService;
 import org.opentravel.ota._2003._05.OTAHotelResRS;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.xml.bind.JAXBException;
 import java.util.Objects;
 
 import static io.grpc.Metadata.ASCII_STRING_MARSHALLER;
