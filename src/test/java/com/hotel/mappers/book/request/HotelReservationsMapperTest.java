@@ -41,7 +41,7 @@ public class HotelReservationsMapperTest {
         when(posMapper.mapPOS(request.getRequestContext(),request.getLanguageCode())).thenReturn(new ArrayOfSourceType());
         OTAHotelResRQ hotelResRQ = hotelReservationsMapper.map(request);
         assertThat(hotelResRQ).isNotNull();
-        assertThat(hotelResRQ.getHotelReservations().getHotelReservation().size()).isEqualTo(1);
+        assertThat(hotelResRQ.getHotelReservations().getHotelReservation()).hasSize(1);
         assertThat(hotelResRQ.getHotelReservations().getHotelReservation().get(0).getResGuests()).isNotNull();
         assertThat(hotelResRQ.getHotelReservations().getHotelReservation().get(0).getRoomStays()).isNotNull();
         assertThat(hotelResRQ.getPOS()).isNotNull();

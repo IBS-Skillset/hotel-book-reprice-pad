@@ -15,6 +15,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.util.Objects;
 
 @Component
 @Slf4j
@@ -31,14 +32,14 @@ public class DjocaClient {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(supplierUrl);
             uriBuilder.path(service);
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(uriBuilder.build().toUriString(), requestWriter.toString(), String.class);
-            log.info(requestWriter.toString());
-            log.info(responseEntity.getBody());
-            return unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
+            log.debug(requestWriter.toString());
+            log.debug(responseEntity.getBody());
+            return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));
         } catch (JAXBException b) {
-            log.info("JAXBException caught " + b);
+            log.error(APIConstants.JAXB_EXCEPTION + b);
             throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         } catch (Exception e) {
-            log.info("Exception occured in request-response to Djoca " + e);
+            log.error(APIConstants.JOCA_EXCEPTION + e);
             throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         }
     }

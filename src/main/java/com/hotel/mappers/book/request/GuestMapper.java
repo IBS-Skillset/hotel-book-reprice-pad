@@ -1,17 +1,17 @@
 package com.hotel.mappers.book.request;
 
 import com.hotel.service.common.UserInfo;
+import lombok.AllArgsConstructor;
 import org.opentravel.ota._2003._05.ArrayOfProfilesTypeProfileInfo;
 import org.opentravel.ota._2003._05.ArrayOfResGuestsTypeResGuest;
 import org.opentravel.ota._2003._05.ProfileType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class GuestMapper {
 
-    @Autowired
-    CustomerTypeMapper customerTypeMapper;
+    private CustomerTypeMapper customerTypeMapper;
 
     public ArrayOfResGuestsTypeResGuest map(UserInfo userInfo) {
         ArrayOfResGuestsTypeResGuest arrayOfResGuestsTypeResGuest = new ArrayOfResGuestsTypeResGuest();

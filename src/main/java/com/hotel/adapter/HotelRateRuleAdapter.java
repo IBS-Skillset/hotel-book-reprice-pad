@@ -1,7 +1,7 @@
 package com.hotel.adapter;
 
 import com.hotel.endpoint.DjocaEndPointFactory;
-import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
+import com.hotel.mappers.raterule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import com.hotel.service.raterule.HotelRateRuleResponse;
 import com.hotel.util.APIConstants;
@@ -24,6 +24,7 @@ import java.io.StringWriter;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 @Slf4j
 @AllArgsConstructor
 @Component
@@ -41,14 +42,14 @@ public class HotelRateRuleAdapter {
             marshaller.marshal(bookingRuleRQ, requestWriter);
             RestTemplate restTemplate = new RestTemplate();
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(request.getRequestContext().getSupplierUrl() + APIConstants.SERVICE, requestWriter.toString(), String.class);
-            if (Objects.nonNull(unmarshaller.unmarshal(new StringReader(responseEntity.getBody()))))
+            if (Objects.nonNull(unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())))))
                 hotelBookingRuleRS = (OTAHotelBookingRuleRS) unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
             return mapper.map(hotelBookingRuleRS, patternMatcher(responseEntity.getBody()));
         } catch (JAXBException b) {
-            log.info("JAXBException caught : " + b);
+            log.error(APIConstants.JAXB_EXCEPTION + b);
             throw b;
         } catch (Exception e) {
-            log.info("Exception occurred in request-response to Djoca : " + e);
+            log.error(APIConstants.JOCA_EXCEPTION + e);
             throw e;
         }
 
@@ -62,7 +63,8 @@ public class HotelRateRuleAdapter {
         while ((line = br.readLine()) != null) {
             sb.append(line.trim());
         }
-        Pattern pattern = Pattern.compile("(?<=<PenaltyDescription><Text xmlns=\"\" xmlns:ns2=\"http://www.opentravel.org/OTA/2003/05\">)(.*?)(?=</Text>)");
+        Pattern pattern = Pattern.compile("(?<=<PenaltyDescription><Text xmlns=\"\" xmlns:ns2=\"http://www.opentravel.org/OTA/2003/05\">)(.*)(?=</Text>)");
+        log.debug("Pattern after compilation" + pattern);
         Matcher matcher = pattern.matcher(sb);
         String group = null;
         while (matcher.find()) {

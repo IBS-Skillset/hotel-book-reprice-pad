@@ -8,16 +8,10 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.opentravel.ota._2003._05.ArrayOfRatePlanType;
-import org.opentravel.ota._2003._05.PaymentCardType;
-import org.opentravel.ota._2003._05.ArrayOfRoomStaysTypeRoomStay;
-import org.opentravel.ota._2003._05.GuestCountType;
-import org.opentravel.ota._2003._05.GuaranteeType;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.atLeast;
+import org.opentravel.ota._2003._05.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoomStaysMapperTest {

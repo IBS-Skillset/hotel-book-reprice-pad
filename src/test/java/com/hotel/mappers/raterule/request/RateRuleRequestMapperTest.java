@@ -1,8 +1,6 @@
 package com.hotel.mappers.raterule.request;
 
 import com.hotel.mappers.common.POSMapper;
-import com.hotel.mappers.rateRule.request.RateRuleRequestMapper;
-import com.hotel.mappers.rateRule.request.RuleMessageMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,23 +15,23 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class RateRuleRequestMapperTest {
+class RateRuleRequestMapperTest {
 
-    @Mock
-    private POSMapper posMapper;
+   @Mock
+   private POSMapper posMapper;
 
-    @Mock
-    private RuleMessageMapper ruleMessageMapper;
+   @Mock
+   private RuleMessageMapper ruleMessageMapper;
 
-    @InjectMocks
-    private RateRuleRequestMapper rateRuleRequestMapper;
+   @InjectMocks
+   private RateRuleRequestMapper rateRuleRequestMapper;
 
-    @Test
-    public void testGetOTAHotelBookingRuleRQ() {
-        HotelRateRuleRequest rateRuleRequest = HotelRateRuleRequest.newBuilder().build();
-        when(posMapper.mapPOS(rateRuleRequest.getRequestContext(),rateRuleRequest.getLanguageCode())).thenReturn(mock(ArrayOfSourceType.class));
-        when(ruleMessageMapper.mapRuleMessage(rateRuleRequest)).thenReturn(mock(OTAHotelBookingRuleRQ.RuleMessage.class));
-        OTAHotelBookingRuleRQ bookingRuleRQ = rateRuleRequestMapper.getOTAHotelBookingRuleRQ(rateRuleRequest);
-        assertThat(bookingRuleRQ).isNotNull();
-    }
+   @Test
+   void testGetOTAHotelBookingRuleRQ() {
+      HotelRateRuleRequest rateRuleRequest = HotelRateRuleRequest.newBuilder().build();
+      when(posMapper.mapPOS(rateRuleRequest.getRequestContext(), rateRuleRequest.getLanguageCode())).thenReturn(mock(ArrayOfSourceType.class));
+      when(ruleMessageMapper.mapRuleMessage(rateRuleRequest)).thenReturn(mock(OTAHotelBookingRuleRQ.RuleMessage.class));
+      OTAHotelBookingRuleRQ bookingRuleRQ = rateRuleRequestMapper.getOTAHotelBookingRuleRQ(rateRuleRequest);
+      assertThat(bookingRuleRQ).isNotNull();
+   }
 }

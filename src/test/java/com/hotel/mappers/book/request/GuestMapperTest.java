@@ -10,13 +10,9 @@ import org.opentravel.ota._2003._05.ArrayOfResGuestsTypeResGuest;
 import org.opentravel.ota._2003._05.CustomerType;
 import org.opentravel.ota._2003._05.EmailType;
 import org.opentravel.ota._2003._05.PersonNameType;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.atLeast;
-
-
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GuestMapperTest {
@@ -50,12 +46,12 @@ public class GuestMapperTest {
         customer.getEmail().add(emailType);
         when(customerTypeMapper.map(userInfo)).thenReturn(customer);
         ArrayOfResGuestsTypeResGuest guest = guestMapper.map(userInfo);
-        assertThat(guest.getResGuest().size()).isEqualTo(1);
-        assertThat(guest.getResGuest().get(0).getProfiles().getProfileInfo().size()).isEqualTo(1);
+        assertThat(guest.getResGuest()).hasSize(1);
+        assertThat(guest.getResGuest().get(0).getProfiles().getProfileInfo()).hasSize(1);
         assertThat(guest.getResGuest().get(0).getProfiles().getProfileInfo().get(0).getProfile().getCustomer().getPersonName().getGivenName().get(0)).isEqualTo("Test");
         assertThat(guest.getResGuest().get(0).getProfiles().getProfileInfo().get(0).getProfile().getCustomer().getTelephone().get(0).getPhoneNumber()).isEqualTo("1234");
         assertThat(guest.getResGuest().get(0).getProfiles().getProfileInfo().get(0).getProfile().getCustomer().getEmail().get(0).getValue()).isEqualTo("test@gmail.com");
-        verify(customerTypeMapper,atLeast(1)).map(userInfo);
+        verify(customerTypeMapper, atLeast(1)).map(userInfo);
 
     }
 

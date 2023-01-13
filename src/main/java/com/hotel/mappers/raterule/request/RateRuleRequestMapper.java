@@ -1,4 +1,4 @@
-package com.hotel.mappers.rateRule.request;
+package com.hotel.mappers.raterule.request;
 
 import com.hotel.mappers.common.POSMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;

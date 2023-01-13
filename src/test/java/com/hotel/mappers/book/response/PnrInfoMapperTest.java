@@ -13,13 +13,13 @@ import org.opentravel.ota._2003._05.TPAExtensionsType;
 import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class PnrInfoMapperTest {
+class PnrInfoMapperTest {
 
     @InjectMocks
     PnrInfoMapper pnrInfoMapper;
 
     @Test
-    public void map() {
+    void map() {
 
         TPAExtensionsType tpaExtensionsType = getTpaExtensionsType();
         ResGlobalInfoType globalInfoType = getGlobalInfo();

@@ -14,7 +14,6 @@ import org.springframework.web.client.RestClientException;
 
 import javax.xml.bind.JAXBException;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -40,9 +39,7 @@ public class DjocaClientTest {
             assertThat(response.getErrors()).isNotNull();
             assertThat(response.getErrors().getError().get(0).getValue()).isEqualTo("Invalid Profile");
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (RestClientException e) {
+        } catch (JAXBException | RestClientException e) {
             e.printStackTrace();
         }
     }
@@ -56,9 +53,7 @@ public class DjocaClientTest {
             Object responseEntity = client.restClient(request, endPointUrl, service);
             assertThat(responseEntity).isNull();
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (RestClientException e) {
+        } catch (JAXBException | RestClientException e) {
             e.printStackTrace();
         }
     }
