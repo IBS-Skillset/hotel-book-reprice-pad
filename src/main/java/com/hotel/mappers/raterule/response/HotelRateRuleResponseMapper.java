@@ -1,4 +1,4 @@
-package com.hotel.mappers.rateRule.response;
+package com.hotel.mappers.raterule.response;
 
 import com.hotel.service.raterule.HotelRateRuleResponse;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
@@ -10,8 +10,8 @@ import static com.hotel.util.APIConstants.TRUE;
 @Component
 public class HotelRateRuleResponseMapper {
 
-    public HotelRateRuleResponse map(OTAHotelBookingRuleRS hotelBookingRuleRS,String penaltyDescriptionText) throws  Exception {
-        try{
+    public HotelRateRuleResponse map(OTAHotelBookingRuleRS hotelBookingRuleRS, String penaltyDescriptionText) throws Exception {
+        try {
             return HotelRateRuleResponse.newBuilder()
                     .setHotelCode(hotelBookingRuleRS.getRuleMessage().getHotelCode())
                     .setRatePlanId(hotelBookingRuleRS.getRuleMessage().getStatusApplication().getRatePlanID())
@@ -22,8 +22,7 @@ public class HotelRateRuleResponseMapper {
                     .setIsCancellable(hotelBookingRuleRS.getRuleMessage().getTPAExtensions().getNonRefundable().equals(FALSE))
                     .setIsBreakfastIncluded(hotelBookingRuleRS.getRuleMessage().getTPAExtensions().getBreakfastIncluded().equals(TRUE))
                     .build();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw new Exception(hotelBookingRuleRS.getErrors().getError().get(0).getValue(),
                     new Throwable(hotelBookingRuleRS.getErrors().getError().get(0).getCode()));
         }

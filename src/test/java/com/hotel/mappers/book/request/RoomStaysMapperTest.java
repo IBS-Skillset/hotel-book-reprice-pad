@@ -13,6 +13,7 @@ import org.opentravel.ota._2003._05.PaymentCardType;
 import org.opentravel.ota._2003._05.ArrayOfRoomStaysTypeRoomStay;
 import org.opentravel.ota._2003._05.GuestCountType;
 import org.opentravel.ota._2003._05.GuaranteeType;
+
 import static org.mockito.Mockito.when;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.atLeast;

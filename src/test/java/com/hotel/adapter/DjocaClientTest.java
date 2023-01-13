@@ -3,6 +3,7 @@ package com.hotel.adapter;
 import com.hotel.exception.HotelBookException;
 import com.hotel.service.availability.HotelAvailabilityRequest;
 import com.hotel.service.common.Context;
+import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -14,11 +15,11 @@ import org.springframework.web.client.RestClientException;
 
 import javax.xml.bind.JAXBException;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 
 @RunWith(MockitoJUnitRunner.class)
+@Slf4j
 public class DjocaClientTest {
 
     private String endPointUrl = "https://traveldoo.koedia.com";
@@ -40,9 +41,8 @@ public class DjocaClientTest {
             assertThat(response.getErrors()).isNotNull();
             assertThat(response.getErrors().getError().get(0).getValue()).isEqualTo("Invalid Profile");
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (RestClientException e) {
+        } catch (JAXBException | RestClientException e) {
+            log.error("Exception caught: " + e);
             e.printStackTrace();
         }
     }
@@ -56,9 +56,8 @@ public class DjocaClientTest {
             Object responseEntity = client.restClient(request, endPointUrl, service);
             assertThat(responseEntity).isNull();
 
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        } catch (RestClientException e) {
+        } catch (JAXBException | RestClientException e) {
+            log.error("Exception caught: " + e);
             e.printStackTrace();
         }
     }

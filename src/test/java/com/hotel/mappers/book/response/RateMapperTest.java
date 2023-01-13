@@ -15,15 +15,15 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 
 
 @ExtendWith(MockitoExtension.class)
-public class RateMapperTest {
+class RateMapperTest {
 
     @InjectMocks
     RateMapper rateMapper;
 
     @Test
-    public void map() {
+    void map() {
         TotalType rateResponse = getRate();
-        RoomRate rate = rateMapper.map(rateResponse ,"rate description");
+        RoomRate rate = rateMapper.map(rateResponse, "rate description");
         assertThat(rate).isNotNull();
         assertThat(rate.getCurrencyCode()).isEqualTo("EUR");
         assertThat(rate.getTotalAmount()).isEqualTo(14456.65f);

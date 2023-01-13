@@ -24,7 +24,7 @@ public class ErrorResponseMapperTest {
         errorsType.getError().add(errorType);
         HotelBookResponse response = errorResponseMapper.mapErrorResponse(errorsType);
         assertThat(response).isNotNull();
-        assertThat(response.getResponseStatus().getStatus()).isEqualTo(0);
+        assertThat(response.getResponseStatus().getStatus()).isZero();
         assertThat(response.getResponseStatus().getErrorCode()).isEqualTo("222");
         assertThat(response.getResponseStatus().getErrorMessage()).isEqualTo("Booking Failed");
     }

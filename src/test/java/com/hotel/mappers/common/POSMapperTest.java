@@ -10,12 +10,12 @@ import org.opentravel.ota._2003._05.ArrayOfSourceType;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class POSMapperTest {
+class POSMapperTest {
     @InjectMocks
     public POSMapper posMapper;
 
     @Test
-    public void mapPOS() {
+    void mapPOS() {
         String languagecode = "FRE";
         Context context = getContext();
         ArrayOfSourceType response = posMapper.mapPOS(context, languagecode);

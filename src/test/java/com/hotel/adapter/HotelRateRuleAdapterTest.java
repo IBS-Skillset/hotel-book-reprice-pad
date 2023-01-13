@@ -1,6 +1,6 @@
 package com.hotel.adapter;
 
-import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
+import com.hotel.mappers.raterule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.common.Context;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import com.hotel.service.raterule.HotelRateRuleResponse;
@@ -16,7 +16,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class HotelRateRuleAdapterTest {
+class HotelRateRuleAdapterTest {
 
     private String endPointUrl = "https://traveldoo.koedia.com";
     private String service = "hotel-reservation";
@@ -29,14 +29,15 @@ public class HotelRateRuleAdapterTest {
 
     @InjectMocks
     HotelRateRuleAdapter client;
+
     @Test
-    public void testRestClient() throws Exception {
-            HotelRateRuleRequest request = HotelRateRuleRequest.newBuilder().
-                    setRequestContext(Context.newBuilder().
-                            setSupplierUrl(endPointUrl).build()).build();
-            HotelRateRuleResponse rateRuleResponse = HotelRateRuleResponse.newBuilder().build();
-            when(mapper.map(any(),any())).thenReturn(rateRuleResponse);
-            HotelRateRuleResponse responseEntity = client.restClient(hotelResRQ,request);
-            assertThat(responseEntity).isNotNull();
+    void testRestClient() throws Exception {
+        HotelRateRuleRequest request = HotelRateRuleRequest.newBuilder().
+                setRequestContext(Context.newBuilder().
+                        setSupplierUrl(endPointUrl).build()).build();
+        HotelRateRuleResponse rateRuleResponse = HotelRateRuleResponse.newBuilder().build();
+        when(mapper.map(any(), any())).thenReturn(rateRuleResponse);
+        HotelRateRuleResponse responseEntity = client.restClient(hotelResRQ, request);
+        assertThat(responseEntity).isNotNull();
     }
 }

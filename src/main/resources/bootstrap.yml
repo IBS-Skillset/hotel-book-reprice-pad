@@ -5,3 +5,11 @@ spring:
     config:
       enabled: true
       uri: http://localhost:9296/config-server
+    vault:
+      application-name: RSA-KEYS
+      authentication: TOKEN
+      scheme: http
+      kv:
+        enabled: true
+  config:
+    import: classpath:secret.properties

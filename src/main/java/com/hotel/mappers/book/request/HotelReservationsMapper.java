@@ -3,24 +3,22 @@ package com.hotel.mappers.book.request;
 import com.hotel.mappers.common.POSMapper;
 import com.hotel.service.book.HotelBookRequest;
 import com.hotel.util.APIConstants;
+import lombok.AllArgsConstructor;
 import org.opentravel.ota._2003._05.HotelReservationType;
 import org.opentravel.ota._2003._05.HotelReservationsType;
 import org.opentravel.ota._2003._05.OTAHotelResRQ;
 import org.opentravel.ota._2003._05.TPAExtensionsType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class HotelReservationsMapper {
 
-    @Autowired
-    RoomStaysMapper roomStaysMapper;
+    private RoomStaysMapper roomStaysMapper;
 
-    @Autowired
-    GuestMapper guestMapper;
+    private GuestMapper guestMapper;
 
-    @Autowired
-    POSMapper posMapper;
+    private POSMapper posMapper;
 
     public OTAHotelResRQ map(HotelBookRequest request) {
         OTAHotelResRQ hotelResRQ = new OTAHotelResRQ();

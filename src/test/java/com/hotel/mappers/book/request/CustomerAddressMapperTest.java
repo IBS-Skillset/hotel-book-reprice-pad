@@ -6,25 +6,26 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.opentravel.ota._2003._05.CustomerType;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class CustomerAddressMapperTest {
+class CustomerAddressMapperTest {
 
-    @InjectMocks
-    CustomerAddressMapper customerAddressMapper;
+   @InjectMocks
+   CustomerAddressMapper customerAddressMapper;
 
-    @Test
-    public void mapAddress() {
+   @Test
+   void mapAddress() {
 
-        Address address = Address.newBuilder()
-                .setStreetAddress("Hotel Paris, Street1, France")
-                .setCityName("Paris")
-                .setZipCode("75102")
-                .setCountryName("France")
-                .setCountryCode("FR")
-                .setPhoneNumber("9937166771")
-                .build();
+      Address address = Address.newBuilder()
+              .setStreetAddress("Hotel Paris, Street1, France")
+              .setCityName("Paris")
+              .setZipCode("75102")
+              .setCountryName("France")
+              .setCountryCode("FR")
+              .setPhoneNumber("9937166771")
+              .build();
 
         CustomerType.Address  custAddress = customerAddressMapper.mapAddress(address);
         assertThat(custAddress).isNotNull();

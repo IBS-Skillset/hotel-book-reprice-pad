@@ -6,20 +6,18 @@ import org.opentravel.ota._2003._05.ArrayOfRoomTypeType;
 import org.opentravel.ota._2003._05.RoomTypeType;
 import org.opentravel.ota._2003._05.DateTimeSpanType;
 import org.opentravel.ota._2003._05.BasicPropertyInfoType;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;
 
 @Component
+@AllArgsConstructor
 public class RoomStaysMapper {
 
-    @Autowired
-    GuaranteeMapper guaranteeMapper;
-    @Autowired
-    GuestCountMapper guestCountMapper;
-    @Autowired
-    RatePlanMapper ratePlanMapper;
+    private GuaranteeMapper guaranteeMapper;
+    private GuestCountMapper guestCountMapper;
+    private RatePlanMapper ratePlanMapper;
 
     public ArrayOfRoomStaysTypeRoomStay map(HotelBookRequest request) {
         ArrayOfRoomStaysTypeRoomStay arrayOfRoomStaysTypeRoomStay = new ArrayOfRoomStaysTypeRoomStay();

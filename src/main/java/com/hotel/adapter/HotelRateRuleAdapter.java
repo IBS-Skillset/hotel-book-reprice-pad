@@ -1,7 +1,7 @@
 package com.hotel.adapter;
 
 import com.hotel.endpoint.DjocaEndPointFactory;
-import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
+import com.hotel.mappers.raterule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import com.hotel.service.raterule.HotelRateRuleResponse;
 import com.hotel.util.APIConstants;
@@ -24,6 +24,7 @@ import java.io.StringWriter;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 @Slf4j
 @AllArgsConstructor
 @Component
@@ -32,6 +33,7 @@ public class HotelRateRuleAdapter {
     private HotelRateRuleResponseMapper mapper;
 
     public HotelRateRuleResponse restClient(OTAHotelBookingRuleRQ bookingRuleRQ, HotelRateRuleRequest request) throws Exception {
+        log.info("HotelRateRuleRequest: " + request.toString());
         OTAHotelBookingRuleRS hotelBookingRuleRS = new OTAHotelBookingRuleRS();
         StringWriter requestWriter = new StringWriter();
         JAXBContext context = DjocaEndPointFactory.context;
@@ -39,16 +41,15 @@ public class HotelRateRuleAdapter {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try {
             marshaller.marshal(bookingRuleRQ, requestWriter);
-            RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(request.getRequestContext().getSupplierUrl() + APIConstants.SERVICE, requestWriter.toString(), String.class);
-            if (Objects.nonNull(unmarshaller.unmarshal(new StringReader(responseEntity.getBody()))))
+            ResponseEntity<String> responseEntity = new RestTemplate().postForEntity(request.getRequestContext().getSupplierUrl() + APIConstants.SERVICE, requestWriter.toString(), String.class);
+            if (Objects.nonNull(unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())))))
                 hotelBookingRuleRS = (OTAHotelBookingRuleRS) unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
             return mapper.map(hotelBookingRuleRS, patternMatcher(responseEntity.getBody()));
         } catch (JAXBException b) {
-            log.info("JAXBException caught : " + b);
+            log.error("JAXBException caught : " + b);
             throw b;
         } catch (Exception e) {
-            log.info("Exception occurred in request-response to Djoca : " + e);
+            log.error("Exception occurred in request-response to Djoca : " + e);
             throw e;
         }
 

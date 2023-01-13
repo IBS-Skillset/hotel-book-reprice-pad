@@ -16,7 +16,7 @@ class GuaranteeMapperTest {
     GuaranteeMapper guaranteeMapper;
 
     @Test
-    public void map() {
+    void map() {
 
         PaymentInfo paymentInfo = PaymentInfo.newBuilder()
                 .setPaymentType("Card")
