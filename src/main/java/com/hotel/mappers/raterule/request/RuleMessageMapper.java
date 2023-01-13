@@ -1,4 +1,4 @@
-package com.hotel.mappers.rateRule.request;
+package com.hotel.mappers.raterule.request;
 
 import com.hotel.service.raterule.HotelRateRuleRequest;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;

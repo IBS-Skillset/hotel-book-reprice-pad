@@ -1,6 +1,5 @@
 package com.hotel.mappers.raterule.response;
 
-import com.hotel.mappers.rateRule.response.HotelRateRuleResponseMapper;
 import com.hotel.service.raterule.HotelRateRuleResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -12,18 +11,19 @@ import org.opentravel.ota._2003._05.ErrorType;
 import org.opentravel.ota._2003._05.OTAHotelBookingRuleRS;
 import org.opentravel.ota._2003._05.TPAExtensionsType;
 import org.opentravel.ota._2003._05.ErrorsType;
+
 import java.math.BigDecimal;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class HotelRateRuleResponseMapperTest {
+class HotelRateRuleResponseMapperTest {
 
     @InjectMocks
     private HotelRateRuleResponseMapper mapper;
 
     @Test
-    public void testMap() throws Exception {
+    void testMap() throws Exception {
         ArrayOfOTAHotelBookingRuleRSRuleMessageStatusApplicationRoomRate.RoomRate roomRate = new ArrayOfOTAHotelBookingRuleRSRuleMessageStatusApplicationRoomRate.RoomRate();
         roomRate.setCurrencyCode("123");
         roomRate.setAmount(BigDecimal.valueOf(345));
@@ -49,7 +49,7 @@ public class HotelRateRuleResponseMapperTest {
     }
 
     @Test
-    public void testMapThrowsException(){
+    void testMapThrowsException() {
         Assertions.assertThrows(Exception.class, () -> {
             ErrorType errorType = new ErrorType();
             errorType.setCode("123");

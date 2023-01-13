@@ -9,28 +9,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.opentravel.ota._2003._05.ArrayOfRoomStaysTypeRoomStay;
-import org.opentravel.ota._2003._05.OTAHotelResRS;
-import org.opentravel.ota._2003._05.RatePlanType;
-import org.opentravel.ota._2003._05.SuccessType;
-import org.opentravel.ota._2003._05.ErrorType;
-import org.opentravel.ota._2003._05.ErrorsType;
-import org.opentravel.ota._2003._05.HotelReservationType;
-import org.opentravel.ota._2003._05.HotelReservationsType;
-import org.opentravel.ota._2003._05.DateTimeSpanType;
-import org.opentravel.ota._2003._05.ArrayOfRatePlanType;
-import org.opentravel.ota._2003._05.BasicPropertyInfoType;
-import org.opentravel.ota._2003._05.TotalType;
-import org.opentravel.ota._2003._05.RoomStayType;
-import org.opentravel.ota._2003._05.ParagraphType;
-import org.opentravel.ota._2003._05.ArrayOfRateTypeRate;
+import org.opentravel.ota._2003._05.*;
+
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.when;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class HotelBookResponseMapperTest {
+class HotelBookResponseMapperTest {
 
     @InjectMocks
     HotelBookResponseMapper hotelBookResponseMapper;
@@ -48,7 +33,7 @@ public class HotelBookResponseMapperTest {
     PnrInfoMapper pnrInfoMapper;
 
     @Test
-  public void map() {
+    void map() {
         OTAHotelResRS response = getResponse();
         final ArrayOfRoomStaysTypeRoomStay.RoomStay roomStay = response.getHotelReservations().getHotelReservation().get(0)
                 .getRoomStays().getRoomStay().get(0);
@@ -57,8 +42,8 @@ public class HotelBookResponseMapperTest {
         RoomRate roomRate = RoomRate.newBuilder().build();
         PnrInfo pnrInfo = PnrInfo.newBuilder().build();
         when(addressMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getBasicPropertyInfo().getAddress())).thenReturn(address);
-        when(rateMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase() ,ratePlanType.getRatePlanDescription().getText())).thenReturn(roomRate);
-        when(pnrInfoMapper.map(response.getHotelReservations().getHotelReservation().get(0).getTPAExtensions(),response.getHotelReservations().getHotelReservation().get(0).getResGlobalInfo())).thenReturn(pnrInfo);
+        when(rateMapper.map(response.getHotelReservations().getHotelReservation().get(0).getRoomStays().getRoomStay().get(0).getRoomRates().getRoomRate().get(0).getRates().getRate().get(0).getBase(), ratePlanType.getRatePlanDescription().getText())).thenReturn(roomRate);
+        when(pnrInfoMapper.map(response.getHotelReservations().getHotelReservation().get(0).getTPAExtensions(), response.getHotelReservations().getHotelReservation().get(0).getResGlobalInfo())).thenReturn(pnrInfo);
         HotelBookResponse hotelBookResponse = hotelBookResponseMapper.map(response);
         assertThat(hotelBookResponse).isNotNull();
         assertThat(response.getSuccess().getValue()).isEqualTo("SUCCESS");
@@ -74,17 +59,17 @@ public class HotelBookResponseMapperTest {
     }
 
     @Test
-     public void testErrorCase() {
+    void testErrorCase() {
 
-         OTAHotelResRS response = new OTAHotelResRS();
-         SuccessType success = new SuccessType();
-         success.setValue("FAILURE");
-         response.setSuccess(success);
-         ErrorsType errors = new ErrorsType();
-         ErrorType error = new ErrorType();
-         error.setCode("1234");
-         error.setValue("room not available");
-         errors.getError().add(error);
+        OTAHotelResRS response = new OTAHotelResRS();
+        SuccessType success = new SuccessType();
+        success.setValue("FAILURE");
+        response.setSuccess(success);
+        ErrorsType errors = new ErrorsType();
+        ErrorType error = new ErrorType();
+        error.setCode("1234");
+        error.setValue("room not available");
+        errors.getError().add(error);
          response.setErrors(errors);
          HotelBookResponse.Builder hotelBookResponseBuilder = HotelBookResponse.newBuilder();
          when(errorResponseMapper.mapErrorResponse(response.getErrors())).thenReturn(hotelBookResponseBuilder.build());

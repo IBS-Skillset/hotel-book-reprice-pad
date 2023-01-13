@@ -3,6 +3,7 @@ package com.hotel.mappers.book.response;
 import com.hotel.service.book.RoomRate;
 import org.opentravel.ota._2003._05.TotalType;
 import org.springframework.stereotype.Component;
+
 import static com.hotel.service.util.ProtoBufUtil.safeSetProtoField;
 
 @Component

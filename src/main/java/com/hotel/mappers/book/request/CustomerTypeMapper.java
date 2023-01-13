@@ -1,16 +1,17 @@
 package com.hotel.mappers.book.request;
 
 import com.hotel.service.common.UserInfo;
+import lombok.AllArgsConstructor;
 import org.opentravel.ota._2003._05.CustomerType;
 import org.opentravel.ota._2003._05.EmailType;
 import org.opentravel.ota._2003._05.PersonNameType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
+@AllArgsConstructor
 public class CustomerTypeMapper {
-    @Autowired
-    CustomerAddressMapper customerAddressMapper;
+
+    private CustomerAddressMapper customerAddressMapper;
 
     public CustomerType map(UserInfo userInfo) {
         CustomerType customer = new CustomerType();

@@ -3,27 +3,26 @@ package com.hotel.mappers.book.response;
 import com.hotel.service.book.HotelBookResponse;
 import com.hotel.service.common.ResponseStatus;
 import com.hotel.util.APIConstants;
+import lombok.AllArgsConstructor;
 import org.opentravel.ota._2003._05.ArrayOfRoomStaysTypeRoomStay;
 import org.opentravel.ota._2003._05.OTAHotelResRS;
 import org.opentravel.ota._2003._05.RatePlanType;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
 import static com.hotel.service.util.ProtoBufUtil.safeSetProtoField;
 import static java.util.Objects.nonNull;
 
 @Component
+@AllArgsConstructor
 public class HotelBookResponseMapper {
 
-    @Autowired
+
     private ErrorResponseMapper errorResponseMapper;
 
-    @Autowired
     private AddressMapper addressMapper;
 
-    @Autowired
     private RateMapper rateMapper;
 
-    @Autowired
     private PnrInfoMapper pnrInfoMapper;
 
     public HotelBookResponse map(OTAHotelResRS response) {

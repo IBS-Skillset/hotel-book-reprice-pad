@@ -17,6 +17,7 @@ import org.opentravel.ota._2003._05.CustomerType;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerTypeMapperTest {
 
