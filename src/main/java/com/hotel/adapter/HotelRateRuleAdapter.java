@@ -46,10 +46,10 @@ public class HotelRateRuleAdapter {
                 hotelBookingRuleRS = (OTAHotelBookingRuleRS) unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
             return mapper.map(hotelBookingRuleRS, patternMatcher(responseEntity.getBody()));
         } catch (JAXBException b) {
-            log.info("JAXBException caught : " + b);
+            log.error("JAXBException caught : " + b);
             throw b;
         } catch (Exception e) {
-            log.info("Exception occurred in request-response to Djoca : " + e);
+            log.error("Exception occurred in request-response to Djoca : " + e);
             throw e;
         }
 

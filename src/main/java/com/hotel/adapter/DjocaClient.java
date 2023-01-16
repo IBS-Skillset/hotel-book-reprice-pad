@@ -36,10 +36,10 @@ public class DjocaClient {
             log.info(responseEntity.getBody());
             return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));
         } catch (JAXBException b) {
-            log.info("JAXBException caught " + b);
+            log.error("JAXBException caught " + b);
             throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         } catch (Exception e) {
-            log.info("Exception occured in request-response to Djoca " + e);
+            log.error("Exception occured in request-response to Djoca " + e);
             throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         }
     }
