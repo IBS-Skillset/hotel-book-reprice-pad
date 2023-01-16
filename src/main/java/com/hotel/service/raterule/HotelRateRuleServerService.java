@@ -3,6 +3,7 @@ package com.hotel.service.raterule;
 
 import com.hotel.adapter.HotelRateRuleAdapter;
 import com.hotel.mappers.raterule.request.RateRuleRequestMapper;
+import com.hotel.util.APIConstants;
 import io.grpc.Metadata;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
@@ -38,8 +39,8 @@ public class HotelRateRuleServerService extends HotelRateRuleServiceGrpc.HotelRa
         } catch (Exception e) {
             log.error("Exception occurred in getHotelRateRule " + e);
             Metadata metadata = new Metadata();
-            metadata.put(Metadata.Key.of("error",ASCII_STRING_MARSHALLER), getString(e));
-            responseObserver.onError(new StatusRuntimeException(Status.CANCELLED,metadata));
+            metadata.put(Metadata.Key.of(APIConstants.ERROR, ASCII_STRING_MARSHALLER), getString(e));
+            responseObserver.onError(new StatusRuntimeException(Status.CANCELLED, metadata));
         }
     }
 }

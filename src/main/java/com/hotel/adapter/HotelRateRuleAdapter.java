@@ -46,10 +46,10 @@ public class HotelRateRuleAdapter {
                 hotelBookingRuleRS = (OTAHotelBookingRuleRS) unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
             return mapper.map(hotelBookingRuleRS, patternMatcher(responseEntity.getBody()));
         } catch (JAXBException b) {
-            log.error(APIConstants.JAXB_EXCEPTION + b);
+            log.info("JAXBException caught : " + b);
             throw b;
         } catch (Exception e) {
-            log.error(APIConstants.JOCA_EXCEPTION + e);
+            log.info("Exception occurred in request-response to Djoca : " + e);
             throw e;
         }
 
@@ -63,8 +63,7 @@ public class HotelRateRuleAdapter {
         while ((line = br.readLine()) != null) {
             sb.append(line.trim());
         }
-        Pattern pattern = Pattern.compile("(?<=<PenaltyDescription><Text xmlns=\"\" xmlns:ns2=\"http://www.opentravel.org/OTA/2003/05\">)(.*)(?=</Text>)");
-        log.debug("Pattern after compilation" + pattern);
+        Pattern pattern = Pattern.compile("(?<=<PenaltyDescription><Text xmlns=\"\" xmlns:ns2=\"http://www.opentravel.org/OTA/2003/05\">)(.*?)(?=</Text>)");
         Matcher matcher = pattern.matcher(sb);
         String group = null;
         while (matcher.find()) {

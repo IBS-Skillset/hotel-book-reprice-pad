@@ -32,14 +32,14 @@ public class DjocaClient {
             UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(supplierUrl);
             uriBuilder.path(service);
             ResponseEntity<String> responseEntity = restTemplate.postForEntity(uriBuilder.build().toUriString(), requestWriter.toString(), String.class);
-            log.debug(requestWriter.toString());
-            log.debug(responseEntity.getBody());
+            log.info(requestWriter.toString());
+            log.info(responseEntity.getBody());
             return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));
         } catch (JAXBException b) {
-            log.error(APIConstants.JAXB_EXCEPTION + b);
+            log.info("JAXBException caught " + b);
             throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         } catch (Exception e) {
-            log.error(APIConstants.JOCA_EXCEPTION + e);
+            log.info("Exception occured in request-response to Djoca " + e);
             throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
         }
     }

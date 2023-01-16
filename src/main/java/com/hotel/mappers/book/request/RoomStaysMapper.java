@@ -1,8 +1,12 @@
 package com.hotel.mappers.book.request;
 
 import com.hotel.service.book.HotelBookRequest;
+import org.opentravel.ota._2003._05.ArrayOfRoomStaysTypeRoomStay;
+import org.opentravel.ota._2003._05.ArrayOfRoomTypeType;
+import org.opentravel.ota._2003._05.RoomTypeType;
+import org.opentravel.ota._2003._05.DateTimeSpanType;
+import org.opentravel.ota._2003._05.BasicPropertyInfoType;
 import lombok.AllArgsConstructor;
-import org.opentravel.ota._2003._05.*;
 import org.springframework.stereotype.Component;
 
 import java.math.BigInteger;

@@ -11,6 +11,7 @@ import javax.xml.bind.JAXBException;
 
 @Slf4j
 public class DjocaEndPointFactory {
+    public static final JAXBContext context;
 
     static {
         try {
@@ -25,8 +26,6 @@ public class DjocaEndPointFactory {
             throw new IllegalStateException("Cannot initialize DJOCA services");
         }
     }
-
-    public static final JAXBContext context;
 
     private DjocaEndPointFactory() {
 
