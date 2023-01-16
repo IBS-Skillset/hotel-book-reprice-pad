@@ -36,18 +36,22 @@ public class BookServerService extends HotelBookServiceGrpc.HotelBookServiceImpl
     public void getHotelBook(HotelBookRequest request, StreamObserver<HotelBookResponse> responseObserver) {
         OTAHotelResRS hotelResRS = new OTAHotelResRS();
         try {
+            log.info("HotelBookRequest code: " + request.getHotelCode());
+            log.info("HotelBookRequest paymentType: " + request.getPaymentInfo().getPaymentType());
+            log.info("HotelBookRequest roomCount: " + request.getRoomCount());
             Object response = djocaClient.restClient(hotelReservationsMapper.map(request), request.getRequestContext().getSupplierUrl(), APIConstants.BOOK_SERVICE);
             if (Objects.nonNull(response)) {
-                hotelResRS = (OTAHotelResRS)response;
+                hotelResRS = (OTAHotelResRS) response;
             }
             HotelBookResponse hotelBookResponse = hotelBookResponseMapper.map(hotelResRS);
             responseObserver.onNext(hotelBookResponse);
             responseObserver.onCompleted();
 
         } catch (Exception b) {
+            log.error("Exception occurred in getHotelBook");
             Metadata metadata = new Metadata();
-            metadata.put(Metadata.Key.of("error",ASCII_STRING_MARSHALLER), getString(b));
-            responseObserver.onError(new StatusRuntimeException(Status.CANCELLED,metadata));
+            metadata.put(Metadata.Key.of(APIConstants.ERROR, ASCII_STRING_MARSHALLER), getString(b));
+            responseObserver.onError(new StatusRuntimeException(Status.CANCELLED, metadata));
         }
 
     }

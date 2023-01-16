@@ -22,16 +22,15 @@ import java.util.Objects;
 public class DjocaClient {
 
     public Object restClient(Object request, String supplierUrl, String service) throws JAXBException {
+        log.info("Request for DJocaClient " + request.toString());
         JAXBContext context = DjocaEndPointFactory.context;
         final StringWriter requestWriter = new StringWriter();
         Marshaller marshaller = context.createMarshaller();
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try {
             marshaller.marshal(request, requestWriter);
-            RestTemplate restTemplate = new RestTemplate();
-            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(supplierUrl);
-            uriBuilder.path(service);
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(uriBuilder.build().toUriString(), requestWriter.toString(), String.class);
+            UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(supplierUrl).path(service);
+            ResponseEntity<String> responseEntity = new RestTemplate().postForEntity(uriBuilder.build().toUriString(), requestWriter.toString(), String.class);
             log.info(requestWriter.toString());
             log.info(responseEntity.getBody());
             return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));

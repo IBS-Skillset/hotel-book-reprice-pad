@@ -33,6 +33,7 @@ public class HotelRateRuleAdapter {
     private HotelRateRuleResponseMapper mapper;
 
     public HotelRateRuleResponse restClient(OTAHotelBookingRuleRQ bookingRuleRQ, HotelRateRuleRequest request) throws Exception {
+        log.info("HotelRateRuleRequest: " + request.toString());
         OTAHotelBookingRuleRS hotelBookingRuleRS = new OTAHotelBookingRuleRS();
         StringWriter requestWriter = new StringWriter();
         JAXBContext context = DjocaEndPointFactory.context;
@@ -40,8 +41,7 @@ public class HotelRateRuleAdapter {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         try {
             marshaller.marshal(bookingRuleRQ, requestWriter);
-            RestTemplate restTemplate = new RestTemplate();
-            ResponseEntity<String> responseEntity = restTemplate.postForEntity(request.getRequestContext().getSupplierUrl() + APIConstants.SERVICE, requestWriter.toString(), String.class);
+            ResponseEntity<String> responseEntity = new RestTemplate().postForEntity(request.getRequestContext().getSupplierUrl() + APIConstants.SERVICE, requestWriter.toString(), String.class);
             if (Objects.nonNull(unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())))))
                 hotelBookingRuleRS = (OTAHotelBookingRuleRS) unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
             return mapper.map(hotelBookingRuleRS, patternMatcher(responseEntity.getBody()));
