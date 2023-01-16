@@ -3,6 +3,7 @@ package com.hotel.adapter;
 import com.hotel.endpoint.DjocaEndPointFactory;
 import com.hotel.exception.HotelBookException;
 import com.hotel.util.APIConstants;
+import com.hotel.util.ErrorMappings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -20,6 +21,12 @@ import java.io.StringWriter;
 @Slf4j
 public class DjocaClient {
 
+    private final ErrorMappings errorMappings;
+
+    public DjocaClient(ErrorMappings errorMappings) {
+        this.errorMappings = errorMappings;
+    }
+
     public Object restClient(Object request, String supplierUrl, String service) throws JAXBException {
         JAXBContext context = DjocaEndPointFactory.context;
         final StringWriter requestWriter = new StringWriter();
@@ -36,10 +43,10 @@ public class DjocaClient {
             return unmarshaller.unmarshal(new StringReader(responseEntity.getBody()));
         } catch (JAXBException b) {
             log.info("JAXBException caught " + b);
-            throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
+            throw new HotelBookException(b.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         } catch (Exception e) {
-            log.info("Exception occured in request-response to Djoca " + e);
-            throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
+            log.info(errorMappings.getErrorMapping().get(APIConstants.DJOCA).getErrorMessage() + e);
+            throw new HotelBookException(e.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         }
     }
 
