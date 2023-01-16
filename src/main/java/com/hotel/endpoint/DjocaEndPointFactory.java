@@ -22,7 +22,7 @@ public class DjocaEndPointFactory {
                     OTAHotelResRS.class
             );
         } catch (JAXBException e) {
-            log.info("Illegal State Exception thrown");
+            log.error("Illegal State Exception thrown");
             throw new IllegalStateException("Cannot initialize DJOCA services");
         }
     }
