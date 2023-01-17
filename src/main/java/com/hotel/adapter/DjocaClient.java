@@ -21,6 +21,12 @@ import java.util.Objects;
 @Slf4j
 public class DjocaClient {
 
+    private final ErrorMappings errorMappings;
+
+    public DjocaClient(ErrorMappings errorMappings) {
+        this.errorMappings = errorMappings;
+    }
+
     public Object restClient(Object request, String supplierUrl, String service) throws JAXBException {
         log.info("Request for DJocaClient " + request.toString());
         JAXBContext context = DjocaEndPointFactory.context;
@@ -35,11 +41,11 @@ public class DjocaClient {
             log.info(responseEntity.getBody());
             return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));
         } catch (JAXBException b) {
-            log.error("JAXBException caught " + b);
-            throw new HotelBookException(b.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
+            log.info("JAXBException caught " + b);
+            throw new HotelBookException(b.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         } catch (Exception e) {
-            log.error("Exception occured in request-response to Djoca " + e);
-            throw new HotelBookException(e.getMessage() , APIConstants.SUPPLIER_SERVER_ERROR);
+            log.info(errorMappings.getErrorMapping().get(APIConstants.DJOCA).getErrorMessage() + e);
+            throw new HotelBookException(e.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         }
     }
 

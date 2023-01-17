@@ -1,0 +1,10 @@
+status: 0
+message: Error Occurred in pad service
+errorMapping:
+  supplier:
+    errorCode: 999
+    errorMessage: Error from supplier
+  djoca:
+    errorCode: 998
+    errorMessage: Exception occurred in request-response to Djoca
+
