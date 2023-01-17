@@ -3,6 +3,7 @@ package com.hotel.adapter;
 import com.hotel.endpoint.DjocaEndPointFactory;
 import com.hotel.exception.HotelBookException;
 import com.hotel.util.APIConstants;
+import com.hotel.util.ErrorMappings;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -41,10 +42,10 @@ public class DjocaClient {
             log.info(responseEntity.getBody());
             return unmarshaller.unmarshal(new StringReader(Objects.requireNonNull(responseEntity.getBody())));
         } catch (JAXBException b) {
-            log.info("JAXBException caught " + b);
+            log.error("JAXBException caught " + b);
             throw new HotelBookException(b.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         } catch (Exception e) {
-            log.info(errorMappings.getErrorMapping().get(APIConstants.DJOCA).getErrorMessage() + e);
+            log.error(errorMappings.getErrorMapping().get(APIConstants.DJOCA).getErrorMessage() + e);
             throw new HotelBookException(e.getMessage() , errorMappings.getErrorMapping().get(APIConstants.SUPPLIER).getErrorCode());
         }
     }

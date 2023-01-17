@@ -2,6 +2,7 @@ package com.hotel;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.hotel.config.RSAConfiguration;
 import com.hotel.util.ErrorMappings;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
