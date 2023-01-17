@@ -1,6 +1,11 @@
 package com.hotel.mappers.book.request;
 
 import com.hotel.service.common.UserInfo;
+
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.atLeast;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -12,7 +17,6 @@ import org.opentravel.ota._2003._05.EmailType;
 import org.opentravel.ota._2003._05.PersonNameType;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GuestMapperTest {

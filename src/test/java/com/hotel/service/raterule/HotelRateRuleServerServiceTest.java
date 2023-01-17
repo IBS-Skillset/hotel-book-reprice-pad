@@ -15,7 +15,9 @@ import org.opentravel.ota._2003._05.OTAHotelBookingRuleRQ;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.verify;
 
 
 @ExtendWith(MockitoExtension.class)
