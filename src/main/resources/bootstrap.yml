@@ -4,7 +4,7 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: http://localhost:9296/config-server
+      uri: ${CONFIG_SERVER:http://localhost:9296/config-server}
     vault:
       application-name: RSA-KEYS
       authentication: TOKEN
