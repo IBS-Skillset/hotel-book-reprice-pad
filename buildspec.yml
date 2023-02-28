@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      java: correto11
+      java: corretto11
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
@@ -18,6 +18,8 @@ phases:
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
+      - echo Maven build
+      - mvn install
       - echo Build started on `date`
       - echo Building the Docker image...
       - echo $REPOSITORY_URI
@@ -35,4 +37,3 @@ phases:
 artifacts:
   files:
     - imageDefinitions.json
-
