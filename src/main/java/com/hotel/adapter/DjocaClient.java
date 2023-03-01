@@ -5,6 +5,7 @@ import com.hotel.exception.HotelBookException;
 import com.hotel.util.APIConstants;
 import com.hotel.util.ErrorMappings;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
