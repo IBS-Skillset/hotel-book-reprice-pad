@@ -1,5 +1,5 @@
+---
 version: 0.2
-
 phases:
   install:
     runtime-versions:
@@ -7,18 +7,15 @@ phases:
   pre_build:
     commands:
       - echo Entered the pre_build phase
-      - sudo yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
+      - sudo yum-config-manager --add-repo
+        https://cli.github.com/packages/rpm/gh-cli.repo
       - sudo yum install gh
   build:
     commands:
       - echo Build started on `date`
       - echo Running tests
       - mvn test; EXITCODE=$?
-      - echo "${EXITCODE}"
-  post_build:
-    commands:
-      - echo Build completed on `date`
       - |
-      if [ "${EXITCODE}" == 0 ]; then
-        gh pr merge --admin
-      fi
+        if [ "$EXITCODE" = "0" ]; then
+          gh pr merge --admin .
+        fi
