@@ -6,7 +6,7 @@ phases:
       java: corretto11
   pre_build:
     commands:
-      - echo Entered the pre_build phase...
+      - echo Entered the pre_build phase
       - sudo yum-config-manager --add-repo https://cli.github.com/packages/rpm/gh-cli.repo
       - sudo yum install gh
   build:
@@ -18,4 +18,7 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      -if [ "${EXITCODE}" == 0 ]; then gh pr merge --admin
+      - |
+      if [ "${EXITCODE}" == 0 ]; then
+        gh pr merge --admin
+      fi
