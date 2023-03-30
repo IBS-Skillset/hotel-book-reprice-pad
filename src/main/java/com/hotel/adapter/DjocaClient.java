@@ -29,7 +29,7 @@ public class DjocaClient {
     }
 
     public Object restClient(Object request, String supplierUrl, String service) throws JAXBException {
-        log.info("Requet for DJocaClient " + request.toString());
+        log.info("Request for DJocaClient " + request.toString());
         JAXBContext context = DjocaEndPointFactory.context;
         final StringWriter requestWriter = new StringWriter();
         Marshaller marshaller = context.createMarshaller();
