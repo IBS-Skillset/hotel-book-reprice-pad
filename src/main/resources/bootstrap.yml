@@ -4,12 +4,12 @@ spring:
   cloud:
     config:
       enabled: true
-      uri: ${CONFIG_SERVER:http://localhost:9296/config-server}
-    vault:
-      application-name: RSA-KEYS
-      authentication: TOKEN
-      scheme: http
-      kv:
-        enabled: true
-  config:
-    import: classpath:secret.properties
+      uri: http://${HOST_CONFIG:localhost}:9296/config-server
+    #vault:
+     # application-name: RSA-KEYS
+      #authentication: TOKEN
+      #scheme: http
+      #kv:
+       # enabled: true
+  #config:
+    #import: classpath:secret.properties
