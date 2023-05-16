@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: hotel-book-reprice-pad-api
-          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/hotel-book-reprice-pad:4867b28
+          image: 306472407007.dkr.ecr.ap-south-1.amazonaws.com/ibs-skillset-happystays/hotel-book-reprice-pad:9d45e34
           imagePullPolicy: Always
           ports:
             - name: http
